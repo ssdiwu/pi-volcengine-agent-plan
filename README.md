@@ -14,8 +14,8 @@
 
 ```bash
 pi install npm:pi-volcengine-agent-plan
-# 或本地开发
-pi -e /Users/diwu/Workspace/Codes/Githubs/pi-volcengine-agent-plan
+# 或进入本仓库根目录做本地开发
+pi -e .
 ```
 
 配置 API Key（任选其一）：

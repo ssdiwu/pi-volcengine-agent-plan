@@ -63,23 +63,22 @@ interface AgentPlanModel {
 // because Agent Plan is subscription-billed via AFP, not per-token.
 //
 // thinkingLevelMap: VOLC_TLM_MAX (adds xhigh→"max") only for models verified to
-// accept "max" reasoning effort (ark-code-latest, deepseek-v4-flash/pro).
+// accept "max" reasoning effort (deepseek-v4-flash/pro).
 export const MODELS: readonly AgentPlanModel[] = [
-  { id: "ark-code-latest", name: "ark-code-latest (Ark Agent Plan)", input: TEXT_AND_IMAGE, contextWindow: 256000, maxTokens: 32000, thinkingLevelMap: VOLC_TLM_MAX },
+  { id: "doubao-seed-2.1-turbo", name: "Doubao Seed 2.1 Turbo (Ark Agent Plan)", input: TEXT_AND_IMAGE, contextWindow: 256000, maxTokens: 256000, thinkingLevelMap: VOLC_TLM },
   { id: "doubao-seed-evolving", name: "Doubao Seed Evolving (Ark Agent Plan)", input: TEXT_AND_IMAGE, contextWindow: 1024000, maxTokens: 256000, thinkingLevelMap: VOLC_TLM },
   { id: "glm-5.2", name: "GLM-5.2 (Ark Agent Plan)", input: TEXT_ONLY, contextWindow: 1024000, maxTokens: 128000, thinkingLevelMap: VOLC_TLM },
-  { id: "glm-latest", name: "GLM Latest (Ark Agent Plan)", input: TEXT_ONLY, contextWindow: 1024000, maxTokens: 128000, thinkingLevelMap: VOLC_TLM },
   { id: "deepseek-v4-flash", name: "DeepSeek V4 Flash (Ark Agent Plan)", input: TEXT_ONLY, contextWindow: 1024000, maxTokens: 384000, thinkingLevelMap: VOLC_TLM_MAX },
   { id: "deepseek-v4-pro", name: "DeepSeek V4 Pro (Ark Agent Plan)", input: TEXT_ONLY, contextWindow: 1024000, maxTokens: 384000, thinkingLevelMap: VOLC_TLM_MAX },
-  { id: "doubao-seed-2.0-code", name: "Doubao Seed 2.0 Code (Ark Agent Plan)", input: TEXT_AND_IMAGE, contextWindow: 256000, maxTokens: 65536, thinkingLevelMap: VOLC_TLM },
-  { id: "doubao-seed-2.0-pro", name: "Doubao Seed 2.0 Pro (Ark Agent Plan)", input: TEXT_AND_IMAGE, contextWindow: 256000, maxTokens: 65536, thinkingLevelMap: VOLC_TLM },
-  { id: "doubao-seed-2.0-lite", name: "Doubao Seed 2.0 Lite (Ark Agent Plan)", input: TEXT_AND_IMAGE, contextWindow: 256000, maxTokens: 65536, thinkingLevelMap: VOLC_TLM },
-  { id: "doubao-seed-2.0-mini", name: "Doubao Seed 2.0 Mini (Ark Agent Plan)", input: TEXT_AND_IMAGE, contextWindow: 256000, maxTokens: 65536, thinkingLevelMap: VOLC_TLM },
+  { id: "doubao-seed-2.0-code", name: "Doubao Seed 2.0 Code (Ark Agent Plan)", input: TEXT_AND_IMAGE, contextWindow: 256000, maxTokens: 128000, thinkingLevelMap: VOLC_TLM },
+  { id: "doubao-seed-2.0-pro", name: "Doubao Seed 2.0 Pro (Ark Agent Plan)", input: TEXT_AND_IMAGE, contextWindow: 256000, maxTokens: 128000, thinkingLevelMap: VOLC_TLM },
+  { id: "doubao-seed-2.0-lite", name: "Doubao Seed 2.0 Lite (Ark Agent Plan)", input: TEXT_AND_IMAGE, contextWindow: 256000, maxTokens: 128000, thinkingLevelMap: VOLC_TLM },
+  { id: "doubao-seed-2.0-mini", name: "Doubao Seed 2.0 Mini (Ark Agent Plan)", input: TEXT_AND_IMAGE, contextWindow: 256000, maxTokens: 128000, thinkingLevelMap: VOLC_TLM },
   { id: "minimax-m2.7", name: "MiniMax M2.7 (Ark Agent Plan)", input: TEXT_ONLY, contextWindow: 200000, maxTokens: 128000, thinkingLevelMap: VOLC_TLM },
-  { id: "minimax-m3", name: "MiniMax M3 (Ark Agent Plan)", input: TEXT_AND_IMAGE, contextWindow: 512000, maxTokens: 128000, thinkingLevelMap: VOLC_TLM },
+  { id: "minimax-m3", name: "MiniMax M3 (Ark Agent Plan)", input: TEXT_AND_IMAGE, contextWindow: 1024000, maxTokens: 128000, thinkingLevelMap: VOLC_TLM },
   { id: "kimi-k2.6", name: "Kimi K2.6 (Ark Agent Plan)", input: TEXT_AND_IMAGE, contextWindow: 256000, maxTokens: 32000, thinkingLevelMap: VOLC_TLM },
   { id: "kimi-k2.7-code", name: "Kimi K2.7 Code (Ark Agent Plan)", input: TEXT_ONLY, contextWindow: 256000, maxTokens: 32000, thinkingLevelMap: VOLC_TLM },
-  { id: "kimi-k3", name: "Kimi K3 (Ark Agent Plan)", input: TEXT_AND_IMAGE, contextWindow: 1024000, maxTokens: 65536, thinkingLevelMap: VOLC_TLM },
+  { id: "kimi-k3", name: "Kimi K3 (Ark Agent Plan)", input: TEXT_AND_IMAGE, contextWindow: 1024000, maxTokens: 128000, thinkingLevelMap: VOLC_TLM },
 ];
 
 function buildModel(m: AgentPlanModel): Model<"openai-completions"> {
@@ -118,14 +117,26 @@ export default function volcengineAgentPlan(pi: ExtensionAPI): void {
         name: "Volcengine Ark Agent Plan API key",
         login,
         async resolve({ ctx, credential }) {
-          const key =
-            credential?.key ??
-            (await ctx.env("ARK_API_KEY")) ??
-            (await ctx.env("VOLCENGINE_API_KEY"));
-          if (!key) return undefined;
+          if (credential?.key) {
+            return {
+              auth: { apiKey: credential.key },
+              source: "stored API key",
+            };
+          }
+
+          const arkKey = await ctx.env("ARK_API_KEY");
+          if (arkKey) {
+            return {
+              auth: { apiKey: arkKey },
+              source: "ARK_API_KEY",
+            };
+          }
+
+          const volcengineKey = await ctx.env("VOLCENGINE_API_KEY");
+          if (!volcengineKey) return undefined;
           return {
-            auth: { apiKey: key },
-            source: credential?.key ? "stored API key" : "ARK_API_KEY",
+            auth: { apiKey: volcengineKey },
+            source: "VOLCENGINE_API_KEY",
           };
         },
       },

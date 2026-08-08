@@ -4,6 +4,20 @@
 
 ## [Unreleased]
 
+### Fixed
+
+- 仅设置 `VOLCENGINE_API_KEY` 时，凭据来源标签误标为 `ARK_API_KEY`（现按 stored > ARK > VOLCENGINE 逐级判断，保留真实来源）。
+- README 本地开发命令改为仓库根相对 `pi -e .`，移除个人绝对路径。
+
+### Added
+
+- 新增 `doubao-seed-2.1-turbo` 模型（进阶，256k 上下文 / 256k 输出，文本+图像）。
+
+### Changed
+
+- 按 2026.08 官方套餐概览修正 `doubao-seed-2.0-mini/lite/code/pro` 与 `kimi-k3` 最大输出（64k→128k）、`minimax-m3` 上下文窗口（512k→1024k）。
+- 移除 `ark-code-latest`（官方套餐支持模型表格未列）与 `glm-latest`（与 `glm-5.2` 为同一模型，收敛别名）。
+
 ## [0.0.3] - 2026-07-31
 
 ### Fixed
