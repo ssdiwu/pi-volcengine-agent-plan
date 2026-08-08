@@ -4,6 +4,8 @@
 
 ## [Unreleased]
 
+## [0.1.0] - 2026-08-09
+
 ### Fixed
 
 - 仅设置 `VOLCENGINE_API_KEY` 时，凭据来源标签误标为 `ARK_API_KEY`（现按 stored > ARK > VOLCENGINE 逐级判断，保留真实来源）。

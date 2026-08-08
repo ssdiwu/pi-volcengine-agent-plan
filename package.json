@@ -1,6 +1,6 @@
 {
   "name": "pi-volcengine-agent-plan",
-  "version": "0.0.3",
+  "version": "0.1.0",
   "description": "Pi provider extension for Volcengine Ark Agent Plan (api/plan/v3).",
   "license": "MIT",
   "keywords": [
