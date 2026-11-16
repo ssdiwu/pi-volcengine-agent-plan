@@ -5,7 +5,8 @@
 `pi-volcengine-agent-plan` 是火山方舟 Agent Plan 的 Pi provider 扩展：注册 `volcengine-agent-plan` 并连接 Agent Plan endpoint，不兼容 Coding Plan、普通按量 API 或其它火山引擎产品。
 
 - 先读 `README.md` 与 `doc/README.md`，再读接口事实文档、`package.json`、`index.ts` 和相关测试。
-- endpoint、模型目录、能力元数据与凭据解析以实现和 `doc/20-能力参考/` 的已验证事实为权威；本文件不复制当前模型示例、数量、版本或阶段计划。
+- endpoint、模型目录、能力元数据与凭据解析以实现和 `doc/20-能力参考/` 的现行事实为权威；本文件不复制当前模型示例、数量、版本或阶段计划。
+- 外部来源链接、核实日期与本机探测记录属于证据，归档在 `doc/references/`，不作为现行目录或边界的依据。
 
 ## 接口与安全边界
 

@@ -34,7 +34,7 @@ pi --model volcengine-agent-plan/glm-5.2
 ## 目录与入口
 
 - `index.ts` — 扩展入口，注册 provider、认证与模型目录。
-- `doc/` — 设计依据、能力边界与决策档案。
+- `doc/` — 文档入口与分层说明：`doc/README.md` 为地图，`doc/20-能力参考/` 为现行事实，`doc/决策档案/` 为决策档案，`doc/references/` 为来源与验证证据。
 - `test/` — provider 注册、模型配置与兼容性行为测试。
 
 ## 验证
