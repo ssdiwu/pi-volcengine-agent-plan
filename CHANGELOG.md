@@ -6,7 +6,7 @@
 
 ### Changed
 
-- 文档分层：`doc/20-能力参考/火山方舟-Agent-Plan-接口事实.md` 保留为现行边界与现行模型目录；外部来源链接、核实日期与本机探测记录下沉到 `doc/references/火山方舟-Agent-Plan-来源与验证记录.md`。模型目录表与 `index.ts` 对齐（移除 `ark-code-latest`、`glm-latest`，补 `doubao-seed-2.1-turbo`，修正 `doubao-seed-2.0-*` 与 `kimi-k3` 最大输出、`minimax-m3` 上下文窗口）。
+- 文档分层：`doc/规格/火山方舟-Agent-Plan-接口事实.md` 保留为现行边界与现行模型目录；外部来源链接、核实日期与本机探测记录下沉到 `doc/references/火山方舟-Agent-Plan-来源与验证记录.md`。模型目录表与 `index.ts` 对齐（移除 `ark-code-latest`、`glm-latest`，补 `doubao-seed-2.1-turbo`，修正 `doubao-seed-2.0-*` 与 `kimi-k3` 最大输出、`minimax-m3` 上下文窗口）。
 - `doc/README.md` 只做入口，补充分层表、权威与冲突处理、归档边界；新增 `doc/决策档案/0002-v1-不做远端模型动态发现.md` 记录既有的静态模型目录决策。
 - `.gitignore` 增加 `.artifacts/`，作为本机原始现场的归档位置。
 

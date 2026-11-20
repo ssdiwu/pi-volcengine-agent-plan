@@ -1,6 +1,6 @@
 # 火山方舟 Agent Plan 来源与验证记录
 
-本文件是来源与验证证据的归档，不是现行规格。现行模型目录与边界见 `doc/20-能力参考/火山方舟-Agent-Plan-接口事实.md`；现行实现见 `index.ts`。
+本文件是来源与验证证据的归档，不是现行规格。现行模型目录与边界见 `doc/规格/火山方舟-Agent-Plan-接口事实.md`；现行实现见 `index.ts`。
 
 本文件内容按当时的核实日期原样保留，用于追溯结论从哪里来、什么时候核实过。数值与清单可能落后于现行实现。
 
@@ -47,4 +47,4 @@
 
 另有独立的多模态模型（`doubao-seedance` 视频、`doubao-seedream` 图像、`doubao-embedding-vision` 向量），不属于本 Chat Completions 编码 provider 目录。
 
-> 该快照为 2026-07 状态，后续变更见 `CHANGELOG.md`；当前生效目录以 `doc/20-能力参考/火山方舟-Agent-Plan-接口事实.md` 与 `index.ts` 为准。
+> 该快照为 2026-07 状态，后续变更见 `CHANGELOG.md`；当前生效目录以 `doc/规格/火山方舟-Agent-Plan-接口事实.md` 与 `index.ts` 为准。
