@@ -11,9 +11,7 @@
 ### Changed
 
 - 支持 Pi 1.6.0。
-- 文档分层：`doc/规格/火山方舟-Agent-Plan-接口事实.md` 仍是当前边界与当前模型目录；外部来源链接、验证日期与本地探测记录下移到 `doc/references/火山方舟-Agent-Plan-来源与验证记录.md`。模型目录表与 `index.ts` 对齐（移除 `ark-code-latest` 与 `glm-latest`，新增 `doubao-seed-2.1-turbo`，修正 `doubao-seed-2.0-*` 与 `kimi-k3` 的最大输出以及 `minimax-m3` 的上下文窗口）。
-- `doc/README.md` 现在只作为入口，新增分层表、权威/冲突处理与归档边界；新增 `doc/决策档案/0002-v1-不做远端模型动态发现.md` 记录使用静态模型目录的既有决定。
-- 把 `.artifacts/` 加入 `.gitignore`，作为本机原始产物的归档位置。
+- 修正文档中的模型目录，使其与扩展实际提供的模型一致。目录补列 `doubao-seed-2.1-turbo`，移除已淘汰的 `ark-code-latest` 和 `glm-latest` 别名，并修正 `doubao-seed-2.0-*`、`kimi-k3` 的最大输出及 `minimax-m3` 的上下文窗口。
 
 ## [0.1.0] - 2026-08-09
 

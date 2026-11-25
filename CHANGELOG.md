@@ -11,9 +11,7 @@ For new releases, use headings in the format `## [x.y.z] - YYYY-MM-DD`. When an 
 ### Changed
 
 - Supports Pi 1.6.0.
-- Documentation layering: `doc/规格/火山方舟-Agent-Plan-接口事实.md` remains the current boundary and current model catalog; external source links, verification dates, and local probe records move down to `doc/references/火山方舟-Agent-Plan-来源与验证记录.md`. The model catalog table is aligned with `index.ts` (removed `ark-code-latest` and `glm-latest`, added `doubao-seed-2.1-turbo`, corrected maximum outputs for `doubao-seed-2.0-*` and `kimi-k3`, and the context window for `minimax-m3`).
-- `doc/README.md` now serves only as an entry point, with a layering table, authority/conflict handling, and archival boundaries added; added `doc/决策档案/0002-v1-不做远端模型动态发现.md` to record the existing decision to use a static model catalog.
-- Added `.artifacts/` to `.gitignore` as the archive location for raw local artifacts.
+- Corrected the documented model catalog to match the provider. It now lists `doubao-seed-2.1-turbo`, omits the obsolete `ark-code-latest` and `glm-latest` aliases, and shows the correct output limits for `doubao-seed-2.0-*` and `kimi-k3` and context window for `minimax-m3`.
 
 ## [0.1.0] - 2026-08-09
 
