@@ -70,6 +70,7 @@ test("credential resolution reports the source that supplied the API key", async
 
   async function resolveAuth(env: Record<string, string | undefined>, credential?: ApiKeyCredential) {
     return resolve({
+      signal: new AbortController().signal,
       credential,
       ctx: {
         env: async (name) => env[name],

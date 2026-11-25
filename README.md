@@ -1,46 +1,54 @@
 # pi-volcengine-agent-plan
 
-火山方舟（Volcengine Ark）**Agent Plan** 订阅套餐的 [Pi](https://pi.dev) 自定义 provider 扩展。
+English · [简体中文](./README-zh.md)
 
-## 这是什么
+A custom [Pi](https://pi.dev) provider extension for the Volcengine Ark **Agent Plan** subscription.
 
-注册一个 `volcengine-agent-plan` provider，直连火山方舟 Agent Plan 专属 endpoint（`https://ark.cn-beijing.volces.com/api/plan/v3`），通过 OpenAI 兼容的 Chat Completions 协议调用套餐内的模型。只处理 Agent Plan，不处理 Coding Plan、普通按量 API 或其他火山引擎产品。
+## What it is
 
-## 给谁用
+Registers a `volcengine-agent-plan` provider that connects directly to the dedicated Agent Plan endpoint (`https://ark.cn-beijing.volces.com/api/plan/v3`) and calls models in the plan through the OpenAI-compatible Chat Completions protocol. It handles Agent Plan only — not Coding Plan, standard pay-as-you-go APIs, or other Volcengine products.
 
-已订阅火山方舟 Agent Plan 个人版、并希望在 Pi 中直接使用套餐内编码模型的开发者。
+## Who it is for
 
-## 怎么运行
+Developers with a personal Volcengine Ark Agent Plan subscription who want to use the plan's coding models directly in Pi.
+
+## How to run
 
 ```bash
 pi install npm:pi-volcengine-agent-plan
-# 或进入本仓库根目录做本地开发
+# or, from this repository root for local development
 pi -e .
 ```
 
-配置 API Key（任选其一）：
+Configure the API key (either way):
 
 ```bash
-export ARK_API_KEY=你的火山方舟 API Key
-# 或在 Pi 内 /login 后选择 volcengine-agent-plan
+export ARK_API_KEY=your-volcengine-ark-api-key
+# or choose volcengine-agent-plan after /login inside Pi
 ```
 
-随后用 `/model` 选择 `volcengine-agent-plan` 下的模型，或：
+Then pick a model under `volcengine-agent-plan` with `/model`, or run:
 
 ```bash
 pi --model volcengine-agent-plan/glm-5.2
 ```
 
-## 目录与入口
+## Development, tests, and public contracts
 
-- `index.ts` — 扩展入口，注册 provider、认证与模型目录。
-- `doc/` — 文档入口与分层说明：`doc/README.md` 为地图，`doc/规格/` 为现行事实，`doc/决策档案/` 为决策档案，`doc/references/` 为来源与验证证据。
-- `test/` — provider 注册、模型配置与兼容性行为测试。
+- Development and contribution rules: [`AGENTS.md`](./AGENTS.md) and [`doc/README.md`](./doc/README.md).
+- Tests: [`test/README.md`](./test/README.md) and [`test/provider.test.ts`](./test/provider.test.ts); behavior checks cover provider registration, model configuration, and compatibility.
+- Public contract: the current boundary and model catalog are in [`doc/规格/火山方舟-Agent-Plan-接口事实.md`](./doc/规格/火山方舟-Agent-Plan-接口事实.md) (Chinese), aligned with the implementation in [`index.ts`](./index.ts). External sources, verification dates, and probe records live in [`doc/references/`](./doc/references/) and are not current authority.
 
-## 验证
+## Directories and entry points
+
+- `index.ts` — extension entry: provider registration, authentication, and model catalog.
+- `doc/` — document map and layering: [`doc/README.md`](./doc/README.md) is the map, `doc/规格/` holds current facts, `doc/决策档案/` the decision archive, and `doc/references/` sources and verification evidence.
+- `test/` — provider registration, model configuration, and compatibility behavior tests.
+
+## Verification
 
 ```bash
-npm run check   # 类型检查
-npm test        # 行为测试
+npm run check   # type-check
+npm test        # behavior tests
 pi --list-models | grep volcengine-agent-plan
 ```

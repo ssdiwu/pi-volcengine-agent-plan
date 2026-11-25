@@ -4,7 +4,7 @@
 
 `pi-volcengine-agent-plan` 是火山方舟 Agent Plan 的 Pi provider 扩展：注册 `volcengine-agent-plan` 并连接 Agent Plan endpoint，不兼容 Coding Plan、普通按量 API 或其它火山引擎产品。
 
-- 先读 `README.md` 与 `doc/README.md`，再读接口事实文档、`package.json`、`index.ts` 和相关测试。
+- 先读 `README.md` / `README-zh.md` 与 `doc/README.md`，再读接口事实文档、`package.json`、`index.ts` 和相关测试。
 - endpoint、模型目录、能力元数据与凭据解析以实现和 `doc/规格/` 的现行事实为权威；本文件不复制当前模型示例、数量、版本或阶段计划。
 - 外部来源链接、核实日期与本机探测记录属于证据，归档在 `doc/references/`，不作为现行目录或边界的依据。
 
@@ -15,6 +15,14 @@
 - 模型能力元数据必须来自已验证清单，不能从未经验证的远端响应直接采信。目录或能力变更时同步实现、事实文档和测试。
 - 远端动态发现需要额外的管控面认证与签名，不属于现有 provider 调用链；未经明确需求和安全设计，不在扩展内补写 HMAC 管控面实现。
 - 认证、配额和网络错误必须显式返回，不清空可用目录、不泄漏请求头或凭据，也不能把失败伪装为模型不可用之外的成功状态。
+
+## 文档语言与发布记录
+
+- 对外 README 以英文 `README.md` 为默认入口，配套完整中文 `README-zh.md`；顶部互链，安装、配置、命令、开发、测试与公开契约入口同步到两种语言，链接只指向仓库内真实文件。
+- `doc/README.md` 顶部保留简短英文贡献导航，中文导航正文继续维护；公开贡献说明（两份 README 与 `doc/README.md`）同步更新。`AGENTS.md`、ADR、规格与历史材料按主要读者决定语言，内部资料可中文；工具名、命令、配置键、环境变量和 API 字段保持原样。
+- 两份变更日志都在本 GitHub 仓库维护：`CHANGELOG.md` 是英文发布记录，`CHANGELOG-zh.md` 是中文日常记录；两份只写用户可感知事实，不写验证日志、内部过程或纯文档整理。
+- 日常用中文把已完成的用户可感知变化写入 `CHANGELOG-zh.md`；准备发布（release）时按版本把同一版本的用户可感知条目同步进英文 `CHANGELOG.md`，两份都保留该版本记录，并核对版本、日期与 issue 链接。
+- `README.md` 是英文默认版（npm 默认展示），`README-zh.md` 是同包附带的中文版；两份 README 与两份 changelog 都随 npm 包发布。发布前用 `npm pack --dry-run --ignore-scripts --json` 核对清单包含 `README.md`、`README-zh.md`、`CHANGELOG.md`、`CHANGELOG-zh.md`。
 
 ## 验证与外部动作
 
@@ -27,5 +35,5 @@ pi -e . --list-models | grep volcengine-agent-plan
 ```
 
 - 测试默认不得发起真实网络请求。真实流式冒烟命令以 README 为准，仅在用户明确授权、凭据与额度可用时执行，并记录 provider、命令、响应边界和未覆盖项。
-- 用户可感知变化同步 README 与 `CHANGELOG.md` 的 `Unreleased`（文件存在时）。
+- 用户可感知变化按上方「文档语言与发布记录」同步：发布时整理进英文 `CHANGELOG.md`，日常记录留在内部中文 changelog。
 - 未经用户明确授权，不创建 commit，不执行 `git push`、推送 tag、`npm publish`，也不发起真实模型请求或其它外部系统写入。
